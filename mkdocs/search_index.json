@@ -1,0 +1,84 @@
+{
+    "docs": [
+        {
+            "location": "/",
+            "text": "check-mk-web-api\n\n\nInstallation\n\n\n\n\nFrom source code\n\n\n\n\ngit clone https://github.com/brennerm/check-mk-web-api\ncd check-mk-web-api\nsudo python3 setup.py install\n\n\n\n\n\n\nWith pip\n\n\n\n\npip install check_mk_web_api\n\n\n\n\nQuickstart\n\n\nInitialization\n\n\nimport check_mk_web_api\napi = check_mk_web_api.WebApi('http://checkmk.company.com/check_mk/webapi.py', username='automation', secret='123456')\n\n\n\n\nAdd Host\n\n\n>>> api.add_host('webserver00.com')\n\n\n\n\nEdit Host\n\n\n>>> api.edit_host('webserver00.com', ipaddress='192.168.0.100')\n\n\n\n\nDelete Host\n\n\n>>> api.delete_host('webserver00.com')\n\n\n\n\nGet Host\n\n\n>>> api.get_host('webserver00.com')\n{\n    'hostname': 'webserver00.com',\n    'attributes': {\n        'ipaddress': '192.168.0.100'\n    },\n    'path': ''\n}\n\n\n\n\nGet All Hosts\n\n\n>>> api.get_all_hosts()\n{\n    'webserver00.com': {\n        'hostname': 'webserver00.com',\n        'attributes': {\n            'ipaddress': '192.168.0.100'\n        },\n        'path': ''\n    },\n    'webserver01.com': {\n        'hostname': 'webserver01.com',\n        'attributes': {\n            'ipaddress': '192.168.0.101'\n        },\n        'path': ''\n    }\n}\n\n\n\n\nDiscover Services\n\n\n>>> api.discover_services('webserver00.com')\n{'removed': '0', 'new_count': '16', 'added': '16', 'kept': '0'}\n\n\n\n\nBake Agents\n\n\n>>> api.bake_agents()\n\n\n\n\nActivate Changes\n\n\n>>> api.activate_changes()\n\n\n\n\nAPI Documentation",
+            "title": "Home"
+        },
+        {
+            "location": "/#check-mk-web-api",
+            "text": "",
+            "title": "check-mk-web-api"
+        },
+        {
+            "location": "/#installation",
+            "text": "From source code   git clone https://github.com/brennerm/check-mk-web-api\ncd check-mk-web-api\nsudo python3 setup.py install   With pip   pip install check_mk_web_api",
+            "title": "Installation"
+        },
+        {
+            "location": "/#quickstart",
+            "text": "",
+            "title": "Quickstart"
+        },
+        {
+            "location": "/#initialization",
+            "text": "import check_mk_web_api\napi = check_mk_web_api.WebApi('http://checkmk.company.com/check_mk/webapi.py', username='automation', secret='123456')",
+            "title": "Initialization"
+        },
+        {
+            "location": "/#add-host",
+            "text": ">>> api.add_host('webserver00.com')",
+            "title": "Add Host"
+        },
+        {
+            "location": "/#edit-host",
+            "text": ">>> api.edit_host('webserver00.com', ipaddress='192.168.0.100')",
+            "title": "Edit Host"
+        },
+        {
+            "location": "/#delete-host",
+            "text": ">>> api.delete_host('webserver00.com')",
+            "title": "Delete Host"
+        },
+        {
+            "location": "/#get-host",
+            "text": ">>> api.get_host('webserver00.com')\n{\n    'hostname': 'webserver00.com',\n    'attributes': {\n        'ipaddress': '192.168.0.100'\n    },\n    'path': ''\n}",
+            "title": "Get Host"
+        },
+        {
+            "location": "/#get-all-hosts",
+            "text": ">>> api.get_all_hosts()\n{\n    'webserver00.com': {\n        'hostname': 'webserver00.com',\n        'attributes': {\n            'ipaddress': '192.168.0.100'\n        },\n        'path': ''\n    },\n    'webserver01.com': {\n        'hostname': 'webserver01.com',\n        'attributes': {\n            'ipaddress': '192.168.0.101'\n        },\n        'path': ''\n    }\n}",
+            "title": "Get All Hosts"
+        },
+        {
+            "location": "/#discover-services",
+            "text": ">>> api.discover_services('webserver00.com')\n{'removed': '0', 'new_count': '16', 'added': '16', 'kept': '0'}",
+            "title": "Discover Services"
+        },
+        {
+            "location": "/#bake-agents",
+            "text": ">>> api.bake_agents()",
+            "title": "Bake Agents"
+        },
+        {
+            "location": "/#activate-changes",
+            "text": ">>> api.activate_changes()",
+            "title": "Activate Changes"
+        },
+        {
+            "location": "/#api-documentation",
+            "text": "",
+            "title": "API Documentation"
+        },
+        {
+            "location": "/check_mk_web_api/",
+            "text": "WebApi\n\n\n\nWebApi(self, check_mk_url:str, username:str, secret:str)\n\n\n\n\nAbstraction for Check_Mk Web API\n\n\nArguments\n\n\n\n\ncheck_mk_url (str)\n: URL to Check_Mk web application, multiple formats are supported\n\n\nusername (str)\n: Name of user to connect as. Make sure this is an automation user.\n\n\nsecret (str)\n: Secret for automation user. This is different from the password!\n\n\n\n\nExamples\n\n\nWebApi('http://checkmk.company.com/monitor/check_mk/webapi.py', 'automation', 'secret')\n\n\n\n\nWebApi('http://checkmk.company.com/monitor/check_mk', 'automation', 'secret')\n\n\n\n\nWebApi('http://checkmk.company.com/monitor', 'automation', 'secret')\n\n\n\n\nDiscoverMode\n\n\n\nWebApi.DiscoverMode(self, /, *args, **kwargs)\n\n\n\n\nMembers\n\n\n\n\nNEW\n: Only discover new services\n\n\nREMOVE\n: Remove exceeding services\n\n\nFIXALL\n: Remove exceeding services and discover new services (Tabula Rasa)\n\n\nREFRESH\n: Start from scratch\n\n\n\n\nActivateMode\n\n\n\nWebApi.ActivateMode(self, /, *args, **kwargs)\n\n\n\n\nMembers\n\n\n\n\nDIRTY\n: Update sites with changes\n\n\nALL\n: Update all slave sites\n\n\nSPECIFIC\n: Only update specified sites\n\n\n\n\nmake_request\n\n\n\nWebApi.make_request(self, action:str, query_params:dict=None, data:dict=None)\n\n\n\n\nMakes arbitrary request to Check_Mk Web API\n\n\nArguments\n\n\n\n\naction (str)\n: Action request, e.g. add_host\n\n\nquery_params (dict)\n: dict of path parameters\n\n\ndata (dict)\n: dict that will be sent as request body\n\n\n\n\nRaises\n\n\n\n\nCheckMkWebApiResponseException\n: Raised when the HTTP status code != 200\n\n\nCheckMkWebApiException\n: Raised when the action's result_code != 0\n\n\n\n\nadd_host\n\n\n\nWebApi.add_host(self, hostname:str, folder:str='/', ipaddress:str=None, alias:str=None, tags:dict=None, **custom_attrs)\n\n\n\n\nAdds a nonexistent host to the Check_MK inventory\n\n\nArguments\n\n\n\n\nhostname (str)\n: Name of host to add\n\n\nfolder (str)\n: Name of folder to add the host to\n\n\nipaddress (str)\n: IP address of host\n\n\nalias (str)\n: Alias for host\n\n\ntags (dict)\n: Dictionary of tags, prefix tag_ can be omitted\n\n\ncustom_attrs (dict)\n: dict that will get merged with generated attributes, mainly for compatibility reasons\n\n\n\n\nedit_host\n\n\n\nWebApi.edit_host(self, hostname:str, unset_attributes:list=None, **custom_attrs)\n\n\n\n\nEdits the properties of an existing host\n\n\nArguments\n\n\n\n\nhostname (str)\n: Name of host to edit\n\n\nunset_attributes (list)\n: List of attributes to unset\n\n\ncustom_attrs (dict)\n: dict that will get merged with generated attributes, mainly for compatibility reasons\n\n\n\n\ndelete_host\n\n\n\nWebApi.delete_host(self, hostname:str)\n\n\n\n\nDeletes a host from the Check_MK inventory\n\n\nArguments\n\n\n\n\nhostname (str)\n: Name of host to delete\n\n\n\n\nget_host\n\n\n\nWebApi.get_host(self, hostname:str, effective_attributes:bool=False)\n\n\n\n\nGets information about one host\n\n\nArguments\n\n\n\n\nhostname (str)\n: Name of host to get\n\n\neffective_attributes (bool)\n: If True attributes with default values will be returned\n\n\n\n\nget_all_hosts\n\n\n\nWebApi.get_all_hosts(self, effective_attributes:bool=False)\n\n\n\n\nGets information about all hosts\n\n\nArguments\n\n\n\n\neffective_attributes (bool)\n: If True attributes with default values will be returned\n\n\n\n\ndiscover_services\n\n\n\nWebApi.discover_services(self, hostname:str, mode:check_mk_web_api.WebApi.DiscoverMode=<DiscoverMode.NEW: 'new'>)\n\n\n\n\nDiscovers the services of a specific host\n\n\nArguments\n\n\n\n\nhostname (str)\n: Name of host to discover services for\n\n\nmode (DiscoverMode)\n: see \nWebApi.DiscoverMode\n\n\n\n\nbake_agents\n\n\n\nWebApi.bake_agents(self)\n\n\n\n\nBakes all agents\n\n\nEnterprise Edition only!\n\n\nactivate_changes\n\n\n\nWebApi.activate_changes(self, mode:check_mk_web_api.WebApi.ActivateMode=<ActivateMode.DIRTY: 'dirty'>, sites:list=None, allow_foreign_changes:bool=False)\n\n\n\n\nActivates all changes previously done\n\n\nArguments\n\n\n\n\nmode (ActivateMode)\n: see \nWebApi.ActivateMode\n\n\nsites (list)\n: List of sites to activates changes on\n\n\nallow_foreign_changes (bool)\n: If True changes of other users will be applied as well",
+            "title": "WebAPI"
+        },
+        {
+            "location": "/exceptions/",
+            "text": "check_mk_web_api.exception\n\n\n\nCheckMkWebApiException\n\n\n\nCheckMkWebApiException(self, /, *args, **kwargs)\n\n\n\n\nException for result_code != 0 in Check_Mk Web API response\n\n\nCheckMkWebApiResponseException\n\n\n\nCheckMkWebApiResponseException(self, response)\n\n\n\n\nThis exception is being thrown when the Check_Mk Web API responds with a HTTP status code != 200\n\n\nArguments\n\n\n\n\nresponse (http.client.HTTPResponse)\n: response that we received from Check_Mk Web API\n\n\n\n\nCheckMkWebApiAuthenticationException\n\n\n\nCheckMkWebApiAuthenticationException(self, /, *args, **kwargs)\n\n\n\n\nThis exception is being thrown when the Check_Mk Web API responds with an authentication error",
+            "title": "Exceptions"
+        }
+    ]
+}
